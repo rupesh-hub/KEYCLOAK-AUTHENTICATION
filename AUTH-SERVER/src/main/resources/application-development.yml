@@ -1,0 +1,92 @@
+spring:
+  #POSTGRES SQL CONFIGURATION
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/user_db
+    username: postgres
+    password: postgres
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 20
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800
+      leak-detection-threshold: 600000
+      pool-name: WriteHikariPool
+
+  second-datasource:
+    url: jdbc:postgresql://localhost:5432/keycloak_db
+    username: postgres
+    password: postgres
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 20
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800
+      leak-detection-threshold: 600000
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    database: postgresql
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+      format_sql: true
+  devtools:
+    restart:
+      enabled: false
+  lifecycle:
+    timeout-per-shutdown-phase: 20s
+
+  cache:
+    type: redis
+  redis:
+    host: localhost
+    port: 6379
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath*:**/sql/*.xml
+logging:
+  level:
+    org.jgroups: INFO
+    org.infinispan: INFO
+    org.keycloak: INFO
+    org.keycloak.services.managers.DefaultBruteForceProtector: DEBUG
+    org.keycloak.services.scheduled.ClusterAwareScheduledTaskRunner: DEBUG
+    org.keycloak.services.managers.UserSessionManager: DEBUG
+    org.keycloak.timer.basic: DEBUG
+
+    com:
+      zaxxer:
+        hikari:
+          HikariConfig: DEBUG
+
+server:
+  forward-headers-strategy: native
+  port: 8081
+  servlet:
+    context-path: "/"
+  shutdown: graceful
+
+keycloak:
+  custom:
+    server:
+      keycloak-path: "/auth"
+
+    infinispan:
+      configLocation: "classpath:infinispan.xml"
+
+    adminUser:
+      username: admin
+      password: admin
+      create-admin-user-enabled: true
+
+    migration:
+      importProvider: singleFile
+      importLocation: keycloak-realm-config.json

@@ -1,0 +1,18 @@
+# Enabled Keycloak Features, see org.keycloak.common.Profile.Feature
+## Features can also be toggled via System-Property, e.g. -Dkeycloak.profile.feature.account_api=enabled
+
+# Enable Token Exchange. Both are needed for token exchange
+
+feature:
+    token_exchange: enabled
+    admin_fine_grained_authz: enabled
+
+# Enable Scripting
+    scripts: enabled
+    upload_scripts: disabled
+
+# Enable new Account Rest API
+    account_api: enabled
+
+# Enable new Account Console
+    account2: enabled

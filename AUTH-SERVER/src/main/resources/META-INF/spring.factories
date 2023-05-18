@@ -1,0 +1,2 @@
+org.springframework.context.ApplicationListener=\com.keycloak.demo.support.PopulateKeycloakPropertiesApplicationListener
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\com.keycloak.demo.embadded.EmbeddedSpringKeycloakAutoConfiguration

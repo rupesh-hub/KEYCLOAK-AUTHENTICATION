@@ -1,0 +1,154 @@
+<p>{{ myMethod() }}</p>
+<p>{{ myStatus ? "ONLINE" : "OFFLINE" }}</p>
+
+<input type="text" [value]="name" />
+
+<input type="text" bind-value="name" />
+
+<div class="test1" [class.test2]="true" [style.margin]="globalMargin">
+  CLASS BINDIGN DEMO
+</div>
+
+<!-- event binding -->
+<button (click)="onAddToCart($event)" value="LAPTOP">ADD TO CART</button>
+
+<br /><br />
+
+<p>{{ message }}</p>
+
+<input type="text" (click)="onInputClick($event)" />
+
+<!-- TEMPLATE REFRENCE -->
+<!-- <input #username type="text" name="username"/>
+<button (click)="onGetInfo(username)">GET INFO</button> -->
+
+<br /><br />
+<!-- TWO WAY DATA BINDING -->
+<input type="text" name="username" [(ngModel)]="username" />
+<p>{{ username }}</p>
+
+<button
+  type="button"
+  class="btn btn-primary"
+  tooltip="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."
+>
+  Simple demo
+</button>
+
+<!-- DIRECTIVES -->
+<!-- 1. Component - (components) 2. Structural (ngIf, ngFor, ngSwitch) 3. Attribute (ngStyle, ngClass) -->
+
+<!-- ngIf -->
+<div class="container">
+  <button class="btn btn-success" (click)="onCreateBlock()">Create</button>
+  <br /><br />
+  <div *ngIf="isValid; then thenblock; else elseblock"></div>
+  <ng-template #thenblock>
+    <p>Block has been created</p>
+  </ng-template>
+  <ng-template #elseblock>
+    <p>No block has been created yet</p>
+  </ng-template>
+</div>
+
+<!-- ngSwitch -->
+<div class="col-md-4">
+  <select class="form-control" (change)="getProduct($event)">
+    <option value="Laptop">Laptop</option>
+    <option value="Mobile">Mobile</option>
+    <option value="TV">TV</option>
+    <option value="Washing Machine">Washing Machine</option>
+  </select>
+</div>
+
+<div class="col-md-6" [ngSwitch]="product">
+  <h2 class="text-success" *ngSwitchCase="'Laptop'">Laptop</h2>
+  <h2 class="text-success" *ngSwitchCase="'Mobile'">Mobile</h2>
+  <h2 class="text-success" *ngSwitchCase="'TV'">TV</h2>
+  <h2 class="text-success" *ngSwitchCase="'Washing Machine'">
+    Washing Machine
+  </h2>
+</div>
+
+<!-- ngFor -->
+<table class="table">
+  <thead>
+    <tr>
+        <th>ID</th>
+        <th>NAME</th>
+        <th>BRAND</th>
+        <th>PRICE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor = "let prod of products">
+        <td>{{prod.id}}</td>
+        <td>{{prod.name}}</td>
+        <td>{{prod.model}}</td>
+        <td>{{prod.price}}</td>
+    </tr>
+  </tbody>
+</table>
+
+
+<!-- ALL AVAILABLE PIPES IN ANGULAR -->
+DatePipe: Used to format dates in a variety of ways, such as long or short date formats, custom formats, and time zones.
+{{ myDate | date }} // displays the date in the default format
+{{ myDate | date:'medium' }} // displays the date in a medium format
+{{ myDate | date:'yyyy-MM-dd HH:mm:ss' }} // displays the date in a custom format
+
+
+DecimalPipe: Used to format decimal numbers with a specified number of digits before and after the decimal point, and to add currency symbols and separators.
+{{ myNumber | number }} // displays the number with the default format
+{{ myNumber | number:'1.2-3' }} // displays the number with one digit before the decimal point and three digits after, and rounded to two decimal places
+{{ myNumber | currency:'USD':'symbol':'1.2-2' }} // displays the number as a US dollar currency with a symbol, two digits before the decimal point, and two digits after, rounded to two decimal places
+
+
+PercentPipe: Used to format numbers as percentages, with a specified number of digits before and after the decimal point, and to add separators.
+{{ myNumber | percent }} // displays the number as a percentage with the default format
+{{ myNumber | percent:'1.2-2' }} // displays the number as a percentage with one digit before the decimal point and two digits after, rounded to two decimal places
+
+
+CurrencyPipe: Used to format currency values with a specified currency symbol and separator, and to round values to a specified number of decimal places.
+{{ myNumber | currency }} // displays the number as a currency with the default format
+{{ myNumber | currency:'EUR':'symbol':'1.2-2' }} // displays the number as a Euro currency with a symbol, two digits before the decimal point, and two digits after, rounded to two decimal places
+
+
+AsyncPipe: Used to subscribe to and display the results of asynchronous operations, such as HTTP requests or Observables.
+<div *ngIf="data$ | async as data">
+  {{ data }}
+</div> // subscribes to the data$ Observable and displays the data when it is available
+
+
+LowerCasePipe: Used to convert text to lowercase.
+{{ myText | lowercase }} // displays the text in lowercase
+
+
+UpperCasePipe: Used to convert text to uppercase.
+{{ myText | uppercase }} // displays the text in uppercase
+
+
+TitleCasePipe: Used to convert text to title case, where the first letter of each word is capitalized.
+{{ myText | titlecase }} // displays the text in title case
+
+
+SlicePipe: Used to extract a slice of an array or string.
+{{ myArray | slice:1:3 }} // displays a slice of the array, starting at index 1 and ending at index 3 (exclusive)
+{{ myText | slice:0:10 }} // displays a slice of the text, starting at index 0 and ending at index 10 (exclusive)
+
+
+JsonPipe: Used to format data as a JSON string.
+{{ myObject | json }} // displays the object as a JSON string
+
+
+KeyValuePipe: Used to iterate over an object's key-value pairs.
+<div *ngFor="let item of myObject | keyvalue">
+  {{ item.key }}: {{ item.value }}
+</div> // iterates over the key-value pairs of the object and displays them
+
+
+DateRangePipe: Used to format a range of dates.
+{{ startDate | daterange:endDate }} // displays the range of dates between the start and end dates
+
+
+
